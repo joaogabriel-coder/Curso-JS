@@ -41,3 +41,55 @@ const soma = array.reduce((acc, item) => {
 
 document.body.innerText = JSON.stringify(soma);
 //retorna o valor acumulado
+
+//Template Literals
+const nome = 'Lucas';
+const msg = `Bem vindo ${nome}`;
+
+document.body.innerText = msg;
+
+//Promises
+fetch('https://api.github.com/users/diego3g')
+    .then(response => {
+        response.json().then(body => {
+            console.log(body);//executa se der certo
+        })
+    })
+    .catch(err => {
+        console.log(err); //executa se der erro
+    })
+    .finally(() => {
+        console.log('Sempre executa');//executa sempre
+    })
+
+const soma2numeros = (a,b) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(a + b);
+        }, 2000);
+    });
+}
+
+soma2numeros(1,3)
+    .then(soma => {
+        document.body.innerText = soma;
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+async function BuscadadosGIT(){
+    const response = await fetch('https://api.github.com/users/diego3g');
+    const body = await response.json();
+    console.log(body);
+}
+
+BuscadadosGIT();
+
+//importação de funções
+import { soma } from './lib.js';
+console.log(soma(1,2));
+
+import * as math from './lib.js'; //importa tudo dentro do arquivo
+console.log(math.soma(1,2));
+
